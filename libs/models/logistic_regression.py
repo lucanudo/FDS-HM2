@@ -1,3 +1,13 @@
+import os
+import sys
+
+# We need he project root to import the functions
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+
+
 import numpy as np
 from libs.math import sigmoid
 
