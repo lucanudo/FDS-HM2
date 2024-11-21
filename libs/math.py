@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def sigmoid(x):
     """
     Function to compute the sigmoid of a given input x.
@@ -11,22 +10,26 @@ def sigmoid(x):
     Returns:
         g: The sigmoid of the input x
     """
-    ##############################
-    ###     YOUR CODE HERE     ###
-    ##############################    
+    # Compute the sigmoid function
+    g = 1 / (1 + np.exp(-x))
     return g
+
 
 def softmax(y):
     """
     Function to compute associated probability for each sample and each class.
 
     Args:
-        y: the predicted 
+        y: the predicted scores (logits), a 2D array of shape (N, K), where:
+           - N is the number of samples
+           - K is the number of classes
 
     Returns:
         softmax_scores: it's the matrix containing probability for each sample and each class. The shape is (N, K)
     """
-    y_exp = np.exp(y - np.max(y, axis=1, keepdims=True))  # Avoid overflow in exp
-    softmax_scores = y_exp / np.sum(y_exp, axis=1, keepdims=True)
+    # Compute the exponential of the input scores, subtracting the max for numerical stability
+    exp_y = np.exp(y - np.max(y, axis=1, keepdims=True))
+    
+    # Normalize to obtain probabilities
+    softmax_scores = exp_y / np.sum(exp_y, axis=1, keepdims=True)
     return softmax_scores
-
