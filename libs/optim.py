@@ -25,13 +25,12 @@ def fit(model, x: np.array, y: np.array, x_val: np.array = None, y_val: np.array
         preds = model.predict(x)
 
         # Compute the gradient of the log-likelihood
-        gradients = model.compute_gradient(x, y, preds)
+        gradients = model.likelihood(preds, y)
 
-        # Update the model's parameters (weights)
-        model.update_theta(gradients, lr)
+        likelihood_history[it] = gradients
 
-        # Compute and record the log-likelihood
-        likelihood_history[it] = model.likelihood(preds, y)
+        gradient = model.compute_gradient(x, y, preds)
+        model.update_theta(gradient, lr)
 
         # If validation data is provided, compute and record validation loss
         if x_val is not None and y_val is not None:
