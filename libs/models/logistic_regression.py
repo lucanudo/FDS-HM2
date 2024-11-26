@@ -1,7 +1,16 @@
+import os
+import sys
+
+# Trova il percorso della directory principale del progetto
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+
 import numpy as np
 from libs.math import sigmoid
 
-class LogisticRegression1:
+class LogisticRegression:
     def __init__(self, num_features : int):
         self.parameters = np.random.normal(0, 0.01, num_features)
 
