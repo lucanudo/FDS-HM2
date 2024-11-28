@@ -27,7 +27,7 @@ def softmax(y):
     Returns:
         softmax_scores: it's the matrix containing probability for each sample and each class. The shape is (N, K)
     """
-        # Compute the exponential of the input scores, subtracting the max for numerical stability
+    # Compute the exponential of the input scores, subtracting the max for numerical stability
     exp_y = np.exp(y - np.max(y, axis=1, keepdims=True))
     
     # Normalize to obtain probabilities

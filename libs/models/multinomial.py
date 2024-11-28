@@ -1,7 +1,7 @@
 import os
 import sys
 
-# We need he project root to import the functions
+# We need the project root to import the functions
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
@@ -25,8 +25,9 @@ class SoftmaxClassifier(LogisticRegression):
         Returns:
             scores: it's the matrix containing raw scores for each sample and each class. The shape is (N, K)
         """
-        scores = X.dot(self.parameters) 
-        return scores
+        scores = X.dot(self.parameters)
+        softmax_scores = softmax(scores)# Apply softmax to get probabilities
+        return softmax_scores
 
     
     def predict_labels(self, X: np.array) -> np.array:
@@ -39,9 +40,8 @@ class SoftmaxClassifier(LogisticRegression):
         Returns:
             preds: it's the predicted class for each sample. The shape is (N,)
         """
-        scores = self.predict(X) # Get raw scores
-        softmax_scores = softmax(scores)# Apply softmax to get probabilities
-        preds = np.argmax(softmax_scores, axis=1) # Get class with highest probability for each sample
+        scores2 = self.predict(X) # Get raw scores
+        preds = np.argmax(scores2, axis=1) # Get class with highest probability for each sample
         return preds
     
     @staticmethod
